@@ -63,7 +63,8 @@
                         </p>
                     </a>
                 </li>
-                
+
+                @include("layouts.navs.shared")
 
             </ul>
         </nav>
