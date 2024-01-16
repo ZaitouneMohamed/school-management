@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ClasseController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\ClassSubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +30,18 @@ Route::controller(AuthController::class)->name("auth.")->group(function () {
     Route::post('/reset-password', 'submitResetPasswordForm')->name("reset-password.function");
 });
 
-Route::middleware("admin")->name("admin.")->group(function () {
+Route::middleware("admin")->prefix("admin")->name("admin.")->group(function () {
     //Admin
-    Route::get('/admin', function () {
+    Route::get('/', function () {
         return view('admin.dashboard');
     })->name("home");
+
+    Route::resource("admin", AdminController::class);
+    Route::resource("class", ClasseController::class);
+    Route::resource("subject", SubjectController::class);
+    Route::resource("class_subject", ClassSubjectController::class);
+
+
 });
 
 Route::middleware("student")->name("student.")->group(function () {
