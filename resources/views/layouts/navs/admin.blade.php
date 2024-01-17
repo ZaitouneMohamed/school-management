@@ -87,6 +87,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('profile.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Profile
+                        </p>
+                    </a>
+                </li>
 
                 @include('layouts.navs.shared')
 

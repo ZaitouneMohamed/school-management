@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClasseController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ClassSubjectController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,13 @@ Route::controller(AuthController::class)->name("auth.")->group(function () {
 
     Route::get('/reset-password/{token}', 'showResetPasswordForm')->name("reset-password.view");
     Route::post('/reset-password', 'submitResetPasswordForm')->name("reset-password.function");
+});
+
+// profile
+Route::controller(ProfileController::class)->name("profile.")->group(function () {
+    Route::get('profile', "index")->name("index");
+    Route::post('/SetProfile', 'SetProfile')->name("SetProfile");
+    Route::post('/updatePassword', 'updatePassword')->name("updatePassword");
 });
 
 Route::middleware("admin")->prefix("admin")->name("admin.")->group(function () {
