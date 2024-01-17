@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Parent\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,9 +67,13 @@ Route::middleware("teacher")->name("teacher.")->group(function () {
     })->name("home");
 });
 
-Route::middleware("parent")->name("parent.")->group(function () {
+Route::middleware("parent")->name("parent.")->prefix("parent")->group(function () {
     //Parent
     Route::get('/parent', function () {
         return view('parent.dashboard');
     })->name("home");
+
+    Route::controller(HomeController::class)->group(function() {
+        Route::get('/MyStudents', 'MyStudents')->name("MyStudents");
+    });
 });

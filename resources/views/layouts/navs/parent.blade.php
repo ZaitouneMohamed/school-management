@@ -54,7 +54,16 @@
                         </li>
                     </ul>
                 </li>
-                @include("layouts.navs.shared")
+                <li class="nav-item">
+                    <a href="{{ route('parent.MyStudents') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            My Student
+                        </p>
+                    </a>
+                </li>
+
+                @include('layouts.navs.shared')
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

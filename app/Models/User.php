@@ -86,4 +86,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Classe::class, 'class_id', 'id');
     }
+    static public function MyStudent()
+    {
+        return self::where('parent_id', auth()->user()->id)->latest()->paginate(10);
+    }
 }
