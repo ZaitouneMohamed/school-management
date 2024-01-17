@@ -64,6 +64,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.student.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Students List
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.class.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>

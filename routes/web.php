@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ClasseController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ClassSubjectController;
+use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,8 +49,7 @@ Route::middleware("admin")->prefix("admin")->name("admin.")->group(function () {
     Route::resource("class", ClasseController::class);
     Route::resource("subject", SubjectController::class);
     Route::resource("class_subject", ClassSubjectController::class);
-
-
+    Route::resource("student", StudentController::class);
 });
 
 Route::middleware("student")->name("student.")->group(function () {

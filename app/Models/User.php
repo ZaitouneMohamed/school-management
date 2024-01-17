@@ -22,7 +22,21 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'admission_number',
+        'role_number',
+        'class_id',
+        'gender',
+        'date_of_birth',
+        'caste',
+        'religion',
+        'mobile',
+        'admission_date',
+        'profile_pic',
+        'blood_group',
+        'height',
+        'weight',
+        'status',
     ];
 
     /**
@@ -52,16 +66,24 @@ class User extends Authenticatable
     static public function getData($role)
     {
         $data = self::select("users.*")
-                    ->where('role',$role);
-                    if (Request()->get('name')) {
-                        $data = $data->where('name', 'like', '%' . Request()->get('name') . '%');
-                    }
-                    if (Request()->get('email')) {
-                        $data = $data->where('email', 'like', '%' . Request()->get('email') . '%');
-                    }
-                    if (Request()->get('date')) {
-                        $data = $data->where('created_at',"=", Request()->get('date'));
-                    }
+            ->where('role', $role);
+        if (Request()->get('name')) {
+            $data = $data->where('name', 'like', '%' . Request()->get('name') . '%');
+        }
+        if (Request()->get('email')) {
+            $data = $data->where('email', 'like', '%' . Request()->get('email') . '%');
+        }
+        if (Request()->get('date')) {
+            $data = $data->where('created_at', "=", Request()->get('date'));
+        }
+        if (Request()->get('status')) {
+            $data = $data->where('status', Request()->get('status'));
+        }
         return $data->latest()->paginate(10);
+    }
+
+    public function classe()
+    {
+        return $this->belongsTo(Classe::class, 'class_id', 'id');
     }
 }
