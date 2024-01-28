@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\ClasseController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ClassSubjectController;
+use App\Http\Controllers\Admin\ClassTimetable;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Parent\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\HomeController as StudentHomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,29 +53,37 @@ Route::middleware("admin")->prefix("admin")->name("admin.")->group(function () {
     Route::resource("subject", SubjectController::class);
     Route::resource("class_subject", ClassSubjectController::class);
     Route::resource("student", StudentController::class);
+    Route::controller(ClassTimetable::class)->group(function () {
+        Route::get('ClassTimetable', "ClassTimetableIndex")->name("ClassTimetable.index");
+        Route::get('GetSubjects/{class_id}', "GetSubjects")->name("ClassTimetable.GetSubjects");
+        Route::post('StoreData', "StoreData")->name("ClassTimetable.StoreData");
+    });
 });
 
-Route::middleware("student")->name("student.")->group(function () {
+Route::middleware("student")->prefix("student")->name("student.")->group(function () {
     //Student
-    Route::get('/student', function () {
+    Route::get('/', function () {
         return view('student.dashboard');
     })->name("home");
+    Route::controller(StudentHomeController::class)->group(function () {
+        Route::get('MySubjects', 'MySubjects')->name("MySubjects");
+    });
 });
 
-Route::middleware("teacher")->name("teacher.")->group(function () {
+Route::middleware("teacher")->name("teacher.")->prefix('teacher')->group(function () {
     //Teacher
-    Route::get('/teacher', function () {
+    Route::get('/', function () {
         return view('teacher.dashboard');
     })->name("home");
 });
 
 Route::middleware("parent")->name("parent.")->prefix("parent")->group(function () {
     //Parent
-    Route::get('/parent', function () {
+    Route::get('/', function () {
         return view('parent.dashboard');
     })->name("home");
 
-    Route::controller(HomeController::class)->group(function() {
+    Route::controller(HomeController::class)->group(function () {
         Route::get('/MyStudents', 'MyStudents')->name("MyStudents");
     });
 });
