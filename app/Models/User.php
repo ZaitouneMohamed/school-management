@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -88,6 +89,27 @@ class User extends Authenticatable
     }
     static public function MyStudent()
     {
-        return self::where('parent_id', auth()->user()->id)->latest()->paginate(10);
+        return Auth::user()->MyStudents()->latest()->paginate(10);
     }
+    public function MyStudents()
+    {
+        return $this->hasMany(User::class, 'parent_id', 'id');
+    }
+    public function MySubjectAsStdent()
+    {
+        return Auth::user()->classe()->subjects();
+    }
+    static public function MySubjectAsStudent()
+    {
+        $data = Auth::user()->classe;
+        // $data = $data->subjects;
+        return $data->subjects;
+    }
+
+    static function MyStudentsSubjectsAsParent()
+    {
+        // $students = Auth::user()->stude
+    }
+
+
 }
