@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\ClassSubjectController;
 use App\Http\Controllers\Admin\ClassTimetable;
+use App\Http\Controllers\Admin\ExaminationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Parent\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -57,6 +58,13 @@ Route::middleware("admin")->prefix("admin")->name("admin.")->group(function () {
         Route::get('ClassTimetable', "ClassTimetableIndex")->name("ClassTimetable.index");
         Route::get('GetSubjects/{class_id}', "GetSubjects")->name("ClassTimetable.GetSubjects");
         Route::post('StoreData', "StoreData")->name("ClassTimetable.StoreData");
+    });
+
+    Route::resource("examination", ExaminationController::class);
+
+    Route::controller(ExaminationController::class)->group(function(){
+        Route::get('ExamSchedules', "ExamSchedules")->name("ExamSchedules");
+        Route::get('calendar', "calendar")->name("calendar");
     });
 });
 
