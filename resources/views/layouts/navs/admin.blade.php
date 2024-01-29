@@ -110,6 +110,30 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.examination.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Exams List
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.ExamSchedules') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Exams Schedules
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.calendar') }}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            <i class="fa fa-calendar" aria-hidden="true"></i>calendar
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('profile.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
